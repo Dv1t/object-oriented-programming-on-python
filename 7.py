@@ -110,6 +110,7 @@ def add_pizza_to_order(order, vv0d):
         order.add_pizza_to_oder(Seafood("thin"))
     return order
 
+#класс кнопки добавления пиццы в заказ
 class PizzaButton:
     def __init__(self, master, pizza,order):
         self.pizza = pizza
@@ -120,16 +121,30 @@ class PizzaButton:
         self.order.add_pizza_to_oder(self.pizza)
         l['text'] = self.order.calculate_cost()
 
+class CookOrderButton:
+    def __init__(self, master, order):
+        self.order = order
+        self.b = Button(master, width=20, command=self.cook_order,text ="Приготовить заказ")
+        self.b.pack()
+    def cook_order(self):
+        self.order.cook_order()
+        o['text'] = "Заказ готов"
 
 
 #Демонстрация использования созданных классов
 my_order = Order()
+#инициализация главного окна
 root = Tk()
+#строка для вывода стоимости заказа
 l=Label(text="")
 l.pack()
+#создание кнопок
 PizzaButton(root,Pepperoni("thin"),my_order)
 PizzaButton(root,Barbecue("traditional"),my_order)
 PizzaButton(root,Seafood("thin"),my_order)
+CookOrderButton(root,my_order)
+o=Label(text="")
+o.pack()
 
 root.mainloop()
 
